@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::resource('/appointments', 'AppointmentsController');
+
 Route::resource('/customers', 'CustomersController');
 
 Route::resource('/services', 'ServicesController');
