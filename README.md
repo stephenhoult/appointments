@@ -113,14 +113,16 @@ Appointment GET requests will also include the related customer, staff member an
 
 Docker
 -
-If you have docker installed then you can run the app easily via docker
+If you have docker installed then you can run the app easily via docker by following the below instructions.
 
-- Clone the repo
-- Browse to the Laravel app folder `cd appointments/src` and run `composer install`
-- Browse to the docker folder `cd ../appointments/docker`
-- Run docker `docker-compose up -d` 
-- To run migrations you must do so from within the docker container.
-- Run `docker exec -it php sh` to get shell access to the PHP docker container
-- Browse to the api folder `cd api`
-- Run the migrations with seed data `php artisan migrate --seed` 
+- Clone the repo: `git clone git@github.com:stephenhoult/appointments.git` and cd into it `cd appointments`.
+- Browse to the Laravel app folder `cd appointments/src/api` and run `composer install`.
+- Browse to the docker folder `cd ../../appointments/docker`.
+- Run docker `docker-compose up -d` .
 - In your browser go to `http://localhost/` and, all being well, you will see `Appointments API` printed on your screen.
+- To run migrations you must do so from within the docker container.
+- Run `docker exec -it php sh` to get shell access to the PHP docker container.
+- Browse to the api folder `cd api`.
+- Run the migrations with seed data `php artisan migrate --seed`.
+- In your browser go to `http://localhost/api/appointments` and you will see appointment data
+
