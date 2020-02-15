@@ -13,5 +13,19 @@ class Appointment extends Model
         'date',
     ];
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function staffMember()
+    {
+        return $this->belongsTo(StaffMember::class);
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 
 }
