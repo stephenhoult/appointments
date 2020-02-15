@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Customer;
 
 class CustomersController extends Controller
 {
@@ -13,17 +14,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Customer::all();
     }
 
     /**
@@ -34,7 +25,15 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'email' => 'required|email|unique:customers',
+            'firstname' => 'required|max:30',
+            'lastname' => 'required|max:30',
+        ]);
+
+        $customer = Customer::create($request->toArray());
+
+        return response($customer, 201);
     }
 
     /**
@@ -45,18 +44,7 @@ class CustomersController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response(Customer::findOrFail($id), 200);
     }
 
     /**
@@ -68,7 +56,17 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+
+        $this->validate($request, [
+            'email' => 'required|email|unique:customers,email,'.$customer->id,
+            'firstname' => 'required|max:30',
+            'lastname' => 'required|max:30',
+        ]);
+
+        $customer->update($request->toArray());
+
+        return response($customer, 200);
     }
 
     /**
@@ -79,6 +77,9 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Customer::findOrFail($id)
+            ->delete();
+
+        return response(null, 204);
     }
 }
