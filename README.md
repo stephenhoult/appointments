@@ -13,6 +13,8 @@ Those entities are:
 
 This API supports CRUD operations on each of the above entities as well as an appointment. On creation or deletion of an appointment a record will be added to an email queue which a cron would then run and send any unsent emails.
 
+Note: This email sending functionality can be seen by browsing to http://localhost/emails/send after creating / deleted appointments via the API.
+
 Customers 
 -
 
@@ -108,3 +110,17 @@ To create an appointment a POST request must be made to /api/appointments and mu
 - date (yyyy-mm-dd hh:ii:ss) - The date and time of the appointment
 
 Appointment GET requests will also include the related customer, staff member and service info. I.e. names and email address of customers and staff members as well as the name of the service.
+
+Docker
+-
+If you have docker installed then you can run the app easily via docker
+
+- Clone the repo
+- Browse to the Laravel app folder `cd appointments/src` and run `composer install`
+- Browse to the docker folder `cd ../appointments/docker`
+- Run docker `docker-compose up -d` 
+- To run migrations you must do so from within the docker container.
+- Run `docker exec -it php sh` to get shell access to the PHP docker container
+- Browse to the api folder `cd api`
+- Run the migrations with seed data `php artisan migrate --seed` 
+- In your browser go to `http://localhost/` and, all being well, you will see `Appointments API` printed on your screen.

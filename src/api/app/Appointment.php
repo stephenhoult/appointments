@@ -28,4 +28,23 @@ class Appointment extends Model
         return $this->belongsTo(Service::class);
     }
 
+    public function buildEmail($type)
+    {
+        if ($type == 'appointmentDeleted') {
+            return $this->buildAppointmentDeletedEmail();
+        } elseif ($type == 'appointmentCreated') {
+            return $this->buildAppointmentCreatedEmail();
+        }
+    }
+
+    private function buildAppointmentDeletedEmail()
+    {
+        return 'Hi '. $this->customer->firstname . '. Your appointment has now been cancelled.';
+    }
+
+    private function buildAppointmentCreatedEmail()
+    {
+        return 'Hi '. $this->customer->firstname . '. Your appointment has now been created.';
+    }
+
 }

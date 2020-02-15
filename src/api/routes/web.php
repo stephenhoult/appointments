@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return ['Appointments API'];
 });
+
+Route::get('/emails/send', 'EmailsController@send');
