@@ -14,3 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::resource('/customers', 'CustomersController');
+
+Route::resource('/staff_members', 'StaffMembersController');
