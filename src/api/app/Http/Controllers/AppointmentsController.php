@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Appointment;
+use App\Email;
 
 class AppointmentsController extends Controller
 {
+    protected $emailModel;
+
+    public function __construct(Email $emailModel)
+    {
+        $this->emailModel = $emailModel;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,6 +50,14 @@ class AppointmentsController extends Controller
         // get the related customer, staff member and service data too
         $appointment = Appointment::with(['customer', 'staffMember', 'service'])
             ->findOrFail($appointment->id);
+
+        // schedule the email to be sent
+        $this->emailModel->scheduleEmail(
+            $appointment->id,
+            $appointment->customer->email,
+            'Appointment Created',
+            $appointment->buildEmail('appointmentCreated')
+        );
 
         return response($appointment, 201);
     }
@@ -93,6 +109,13 @@ class AppointmentsController extends Controller
     {
         $appointment = Appointment::with(['customer', 'staffMember', 'service'])
             ->findOrFail($id);
+
+        $this->emailModel->scheduleEmail(
+            $appointment->id,
+            $appointment->customer->email,
+            'Appointment Deleted',
+            $appointment->buildEmail('appointmentDeleted')
+        );
 
         $appointment->delete();
 
