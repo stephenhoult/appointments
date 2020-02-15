@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('/customers', 'CustomersController');
+Route::resource('/appointments', 'AppointmentsController');
 
 Route::resource('/customers', 'CustomersController');
 

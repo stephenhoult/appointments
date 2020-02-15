@@ -2,6 +2,8 @@ Appointments API
 -
 This is based on a Dentist surgery.
 
+A Postman collection can be imported from here: https://www.getpostman.com/collections/0c69c01f1ee2714396d5 - This has example requests set up for each endpoint.
+
 An appointment consists of three different entities as well as a date and time of the appointment.
 
 Those entities are:
