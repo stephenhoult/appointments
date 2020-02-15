@@ -11,6 +11,6 @@ class AppointmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\Appointment', 100)->create();
     }
 }
